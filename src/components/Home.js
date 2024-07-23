@@ -8,56 +8,11 @@ function Home() {
   const [selectedBreed, setSelectedBreed] = useState("");
   const [catImages, setCatImages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [isMenuActive, setIsMenuActive] = useState(false);
-  const [isNavVisible, setIsNavVisible] = useState(true);
   const catSectionRef = useRef(null);
-  const mobileMenuRef = useRef(null);
-  const burgerMenuRef = useRef(null);
-  const lastScrollTop = useRef(0);
 
   useEffect(() => {
     fetchBreeds();
-
-    const handleOutsideClick = (event) => {
-      if (
-        isMenuActive &&
-        mobileMenuRef.current &&
-        !mobileMenuRef.current.contains(event.target) &&
-        event.target !== burgerMenuRef.current
-      ) {
-        setIsMenuActive(false);
-      }
-    };
-
-    const handleScroll = () => {
-      const st = window.scrollY|| document.documentElement.scrollTop;
-      if (st > lastScrollTop.current && st > 10) {
-        // Scrolling down and past the threshold
-        setIsNavVisible(false);
-      } else if (st < lastScrollTop.current || st <= 10) {
-        // Scrolling up or at the top
-        setIsNavVisible(true);
-      }
-      lastScrollTop.current = st <= 0 ? 0 : st;
-    };
-
-    document.addEventListener("click", handleOutsideClick);
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      document.removeEventListener("click", handleOutsideClick);
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [isMenuActive]);
-
-  const toggleMenu = () => {
-    setIsMenuActive((prevState) => !prevState);
-  };
-
-  const closeMenu = () => {
-    setIsMenuActive(false);
-  };
-
+  }, []);
 
   async function fetchBreeds() {
     try {
@@ -99,7 +54,7 @@ function Home() {
       setTimeout(() => {
         setCatImages(catData);
         setIsLoading(false);
-      }, 4000);
+      }, 3000);
     } catch (error) {
       console.error("Error in generateCats:", error);
       setIsLoading(false);
@@ -125,40 +80,7 @@ function Home() {
   }
 
   return (
-    <div className="">
-      <div 
-        ref={burgerMenuRef} 
-        className={`burger-menu ${isNavVisible ? '' : 'hidden'}`} 
-        onClick={toggleMenu}
-      >
-        ☰
-      </div>
-      <div
-        ref={mobileMenuRef}
-        className={`mobile-menu ${isMenuActive ? "active" : ""}`}
-      >
-        <div className="close-icon" onClick={closeMenu}>
-          ×
-        </div>
-        <ul className="mobile-links">
-          <li className="mobile-link">
-            <Link to="/" onClick={closeMenu}>
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link to="#breed-select" onClick={closeMenu}>
-              Generate Your Cat
-            </Link>
-          </li>
-          <li>
-            <Link to="/" onClick={closeMenu}>
-              Contact
-            </Link>
-          </li>
-        </ul>
-      </div>
-
+    <div className="home">
       <main>
         <header>
           <h1>Cat Image Generator</h1>

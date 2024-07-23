@@ -25,7 +25,7 @@ function CatDetails() {
         setTimeout(() => {
           setCatDetails(data);
           setIsLoading(false);
-        }, 4000);
+        }, 3000);
       } catch (error) {
         console.error("Error fetching cat details:", error);
         setIsLoading(false);
