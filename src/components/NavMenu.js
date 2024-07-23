@@ -30,7 +30,7 @@ const NavMenu = () => {
 
   return (
     <nav className="bg-[#87ceeb] pb-10 pt-5">
-      <div className="flex justify-between items-center w-[90%] max-w-[1200px] mx-auto pt-[10px]">
+      <div className="flex justify-between items-center w-[90%] max-w-[1200px] mx-auto pt-[10px] px-5">
         <img
           className="logo"
           src="../assets/cat_image_generator.png"

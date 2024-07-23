@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
 import CatDetails from "./components/CatDetails";
 import NavMenu from "./components/NavMenu";
-import './index.css';
+import './dist/index.css';
 
 function App() {
   return (
